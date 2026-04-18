@@ -1,0 +1,6 @@
+{
+  "name": "surf-alert",
+  "version": "1.0.0",
+  "description": "Telegram surf alert for Palmachim beach",
+  "type": "module"
+}
