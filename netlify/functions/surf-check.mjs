@@ -1,5 +1,5 @@
 export const config = {
-  schedule: "0 5 * * 4,5", // 5:00 UTC = 7:00 Israel time, Thursday(4) and Friday(5)
+  schedule: "0 5 * * 4,5,6", // 5:00 UTC = 7:00 Israel time, Thursday(4), Friday(5), Saturday(6)
 };
 
 const PALMACHIM_LAT = 31.93;
