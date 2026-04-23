@@ -71,8 +71,9 @@ function getGoodSlots(waveData, windData) {
   return goodSlots;
 }
 
-export default async function handler() {
+export default async function handler(req) {
   try {
+    const isTest = new URL(req.url).searchParams.get("test") === "true";
     const today = new Date();
     const dayName = today.toLocaleDateString("en-IL", {
       weekday: "long",
@@ -95,7 +96,12 @@ export default async function handler() {
     const goodBeaches = beachResults.filter((r) => r.goodSlots.length > 0);
 
     if (goodBeaches.length === 0) {
-      console.log("No good surf today at any beach, no message sent.");
+      if (isTest) {
+        await sendTelegram(`😐 <b>Surf Check — ${dayName}, ${dateStr}</b>\n\nNo good waves today at any beach.\n\nPalmachim, Gordon & Bat Yam are all flat. Stay dry. 🤷`);
+        console.log("Test message sent: no good surf.");
+      } else {
+        console.log("No good surf today at any beach, no message sent.");
+      }
       return new Response("OK", { status: 200 });
     }
 
